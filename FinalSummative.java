@@ -2,7 +2,7 @@
  * Date: 
  * Name: Ryan, Tisha, Andrew, Saad
  * Teacher: Mr.Ho
- * Description: Creating a NET pay calculator that displays data on a graph and csv file.
+ * Description: Creating a NET pay calculator that displays data on a graph and csv file based on the income salary the user enters.
  * */
 
 import java.util.Scanner;
@@ -21,7 +21,7 @@ class FinalSummative {
         double f = 0.0505;
         
         // Asks the user questions to know more about them.
-        System.out.println("What is your name?");
+        System.out.println("What is your first and last name");
         in.nextLine();
         
         System.out.println("What is your occupation?");
