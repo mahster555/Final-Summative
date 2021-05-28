@@ -46,6 +46,7 @@ class FinalSummative {
         System.out.println(("Total CPP: ") + (Math.round(Integer.sum(a,c) * b)*10.0)/10.0);
         }
 
+
         public static void printEI(int c,double d){
         // Finds the EI (Employment Insurance) based on their income salary and Ontario's given percentage.
         System.out.println("Calculating Employmemt Insurance");
@@ -58,6 +59,7 @@ class FinalSummative {
         System.out.println("Calculating Federal Income Tax");
         System.out.println(c + " x " + e);
         System.out.println("Total Federal Income Tax: " + (Math.round(c * e)*10.0)/10.0);
+
         }
 
         public static void printPIT(int c,double f){
@@ -67,11 +69,12 @@ class FinalSummative {
         System.out.println("Total Provincial Income Tax: " + (Math.round(c * f)*10.0)/10.0);
         }
 
+
         public static void printTYD(int a,double b,int c, double d){
         // Calculating Total Yearly Deductions.
         System.out.println("Calculating Total Yearly Deductions");
         System.out.println((Math.round(Integer.sum(a,c) * b)*10.0)/10.0 + " + " + (Math.round(c * d)*10.0)/10.0);
         System.out.println("Total Yearly Deductions: " + (Math.round(Integer.sum(a,c) * b + c * d)*10.0)/10.0);
-        
+
     }
 }
