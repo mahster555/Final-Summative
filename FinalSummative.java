@@ -38,40 +38,58 @@ class FinalSummative {
         printPIT(c,f);
         printTYD(a,b,c,d);
     }
-    public static void printCPP(int a,double b,int c){
-        // Finds the useres CPP (Canada Pension Plan) based on their income salary and Ontario's deduction numbers.
+    // Finds the useres CPP (Canada Pension Plan) based on their income salary and Ontario's deduction numbers.
+    public static void printCPP(int a, double b, int c){
         System.out.println("Calculating Canada Pension Plan");
         System.out.println(c + " - " + a + " = " + Integer.sum(a, c));  
         System.out.println(Integer.sum(a,c) + " x " + b);
-        System.out.println(("Total CPP: ") + (Math.round(Integer.sum(a,c) * b)*10.0)/10.0);
+        System.out.println("Total CPP: " + calculateCPP(a,b,c));
         System.out.println();
     }
-    public static void printEI(int c,double d){
-        // Finds the EI (Employment Insurance) based on their income salary and Ontario's given percentage.
+     // Finds the EI (Employment Insurance) based on their income salary and Ontario's given percentage.
+    public static void printEI(int c, double d){
         System.out.println("Calculating Employmemt Insurance");
         System.out.println(c + " x " + d);
-        System.out.println("Total EI: " + (Math.round(c * d)*10.0)/10.0);
+        System.out.println("Total EI: " + calculateEI(c,d));
         System.out.println();
     }
-    public static void printFIT(int c,double e){
+    // Finds the Federal Income Tax based on the gross income.
+    public static void printFIT(int c, double e){
         // Finds the Federal Income Tax based on the gross income.
         System.out.println("Calculating Federal Income Tax");
         System.out.println(c + " x " + e);
-        System.out.println("Total Federal Income Tax: " + (Math.round(c * e)*10.0)/10.0);
+        System.out.println("Total Federal Income Tax: " + calculateFIT(c,e));
         System.out.println();
     }
-    public static void printPIT(int c,double f){
-        // Finds the Pronvicial Income Tax based on the gross income.
+    // Finds the Pronvicial Income Tax based on the gross income.
+    public static void printPIT(int c, double f){
         System.out.println("Calculating Provinvial Income Tax");
         System.out.println(c + " x " + f);
-        System.out.println("Total Provincial Income Tax: " + (Math.round(c * f)*10.0)/10.0);
+        System.out.println("Total Provincial Income Tax: " + calculatePIT (c,f));
         System.out.println();
     }
-    public static void printTYD(int a,double b,int c, double d){
-        // Calculating Total Yearly Deductions.
+    // Calculating Total Yearly Deductions based off of the calulations above.
+    public static void printTYD(int a, double b, int c, double d){
         System.out.println("Calculating Total Yearly Deductions");
         System.out.println((Math.round(Integer.sum(a,c) * b)*10.0)/10.0 + " + " + (Math.round(c * d)*10.0)/10.0);
-        System.out.println("Total Yearly Deductions: " + (Math.round(Integer.sum(a,c) * b + c * d)*10.0)/10.0);
+        System.out.println("Total Yearly Deductions: " + calculateTYD(a,b,c,d));
         System.out.println();
     }
+    // Function calls used for table. 
+    public static double calculateCPP(int a, double b, int c){
+        return (Math.round(Integer.sum(a,c) * b)*10.0)/10.0;
+    }
+    public static double calculateEI(int c, double d){
+        return (Math.round(c * d)*10.0)/10.0;
+    }
+    public static double calculateFIT(int c, double e){
+        return (Math.round(c * e)*10.0)/10.0;
+    }
+    public static double calculatePIT(int c, double f){
+        return (Math.round(c * f)*10.0)/10.0;
+    }
+    public static double calculateTYD(int a, double b, int c, double d){
+        return (Math.round(Integer.sum(a,c) * b + c * d)*10.0)/10.0;
+    }
+    
 }
