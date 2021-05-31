@@ -145,4 +145,39 @@ class FinalSummative {
         tableFrame.setSize(1500,700);
         tableFrame.setVisible(true);
     }
+    public static void resultsFile(String name, String occupation, int c, double CPP, double EI, double FIT, double PIT, double TYD) {
+   
+    String income = Integer.toString(c);
+    String pensionPlan = Double.toString(CPP);
+    String empInsurance = Double.toString(EI);
+    String federalTax = Double.toString(FIT);
+    String provincialTax = Double.toString(PIT);
+    String yearlyDeduct = Double.toString(TYD);
+    
+    // Initializing Scanner
+    Scanner reader = new Scanner(System.in);
+    // Asks Where They Want The New Result File Stored (File Name)
+    System.out.println("Where Do You Want To Store The Results File:");
+    String fileLocation = reader.nextLine();
+
+    try{
+        // Initalise packages
+        FileWriter fw = new FileWriter(fileLocation);
+        BufferedWriter bw = new BufferedWriter(fw);
+        PrintWriter pw = new PrintWriter(bw);
+        // Prints desired information into file
+        pw.println(name+","+occupation+","+income+","+pensionPlan+","+empInsurance+","+federalTax+","+provincialTax+","+yearlyDeduct);
+        // Close print writer
+        pw.flush();	
+        pw.close();
+        System.out.println("File has been saved:"+fileLocation);
+        }
+        catch (Exception e){
+            System.out.println(e);
+        }
+        finally{
+            System.out.println("Code within finally block");
+        }
+        reader.close();
+    }
 }
