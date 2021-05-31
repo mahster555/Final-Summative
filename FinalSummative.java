@@ -42,7 +42,7 @@ class FinalSummative {
     // Finds the useres CPP (Canada Pension Plan) based on their income salary and Ontario's deduction numbers (rounded to the whole number).
     public static void printCPP(int a, double b, int c){
         System.out.println("Calculating Canada Pension Plan");
-        System.out.println("$" + c + " - " + a + " = $" + Integer.sum(a, c));  
+        System.out.println("$" + c + " " + a + " = $" + Integer.sum(a, c));  
         System.out.println("$" + Integer.sum(a,c) + " x " + b);
         System.out.println("Total CPP: $" + calculateCPP(a,b,c));
         System.out.println();
