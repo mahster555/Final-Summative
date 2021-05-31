@@ -145,6 +145,15 @@ class FinalSummative {
         tableFrame.setSize(1500,700);
         tableFrame.setVisible(true);
     }
+    public static void resultsFile(String name, String occupation, int c, double CPP, double EI, double FIT, double PIT, double TYD) {
+   
+    String income = Integer.toString(c);
+    String pensionPlan = Double.toString(CPP);
+    String empInsurance = Double.toString(EI);
+    String federalTax = Double.toString(FIT);
+    String provincialTax = Double.toString(PIT);
+    String yearlyDeduct = Double.toString(TYD);
+    
     // Initializing Scanner
     Scanner reader = new Scanner(System.in);
     // Asks Where They Want The New Result File Stored (File Name)
@@ -169,6 +178,6 @@ class FinalSummative {
         finally{
             System.out.println("Code within finally block");
         }
-            reader.close();
+        reader.close();
     }
 }
