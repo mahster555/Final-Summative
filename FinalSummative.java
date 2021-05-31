@@ -9,6 +9,7 @@ import java.util.Scanner;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import java.io.FileWriter;
 import java.io.BufferedWriter;
 import java.io.PrintWriter;
 
