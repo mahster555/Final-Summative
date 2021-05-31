@@ -25,10 +25,10 @@ class FinalSummative {
         
         // Asks the user questions to know more about them.
         System.out.println("What is your first and last name");
-        in.nextLine();
+        String name = in.nextLine();
         
         System.out.println("What is your occupation?");
-        in.nextLine();
+        String occupation = in.nextLine();
 
         // Used as the main number throughout the calculations (input as whole number or results in error).
         // Can make a while statement if you would like
