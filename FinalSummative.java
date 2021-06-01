@@ -9,14 +9,12 @@ import java.util.Scanner;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import java.io.FileWriter;
-import java.io.BufferedWriter;
-import java.io.PrintWriter;
+import java.io.*;
 
 class FinalSummative {
     public static void main(String[] args) {
         
-        // Created so the user can be able to eneter their name, occupation and income salary.
+        // Created so the user can be able to eneter their name, occupation and income salary (can't close scanner).
         Scanner in = new Scanner(System.in);
 
         // Amount and Perentages used throughout the calculations.
@@ -34,7 +32,6 @@ class FinalSummative {
         String occupation = in.nextLine();
 
         // Used as the main number throughout the calculations (input as whole number or results in error).
-        // Can make a while statement if you would like
         System.out.println("Enter your income salary (to the whole number, if not, reults in an error):");
         int c = in.nextInt(); 
         System.out.println();
@@ -46,6 +43,15 @@ class FinalSummative {
         printTYD(a,b,c,d);
         
         tableGUI(a, b, c, d, e, f, name, occupation);
+        
+        // Rounds to nearest whole, re-intialized to call method below
+        double CPP = (Math.round(Integer.sum(a, c)*b)*100)/100;
+        double EI = (Math.round(c*d)*100)/100;
+        double FIT = (Math.round(c*e)*100)/100;
+        double PIT = (Math.round(c*f)*100)/100;
+        double TYD = (Math.round(Integer.sum(a,c)* b + (c*d))*100)/100;
+
+        resultsFile(name, occupation, c, CPP, EI, FIT, PIT, TYD);
     }
     // Finds the useres CPP (Canada Pension Plan) based on their income salary and Ontario's deduction numbers (rounded to the whole number).
     public static void printCPP(int a, double b, int c){
@@ -150,37 +156,59 @@ class FinalSummative {
     }
     public static void resultsFile(String name, String occupation, int c, double CPP, double EI, double FIT, double PIT, double TYD) {
    
-    String income = Integer.toString(c);
-    String pensionPlan = Double.toString(CPP);
-    String empInsurance = Double.toString(EI);
-    String federalTax = Double.toString(FIT);
-    String provincialTax = Double.toString(PIT);
-    String yearlyDeduct = Double.toString(TYD);
+        String income = Integer.toString(c);
+        String pensionPlan = Double.toString(CPP);
+        String empInsurance = Double.toString(EI);
+        String federalTax = Double.toString(FIT);
+        String provincialTax = Double.toString(PIT);
+        String yearlyDeduct = Double.toString(TYD);
     
-    // Initializing Scanner
-    Scanner reader = new Scanner(System.in);
-    // Asks Where They Want The New Result File Stored (File Name)
-    System.out.println("Where Do You Want To Store The Results File:");
-    String fileLocation = reader.nextLine();
-
-    try{
-        // Initalise packages
-        FileWriter fw = new FileWriter(fileLocation);
-        BufferedWriter bw = new BufferedWriter(fw);
-        PrintWriter pw = new PrintWriter(bw);
-        // Prints desired information into file
-        pw.println(name+","+occupation+","+income+","+pensionPlan+","+empInsurance+","+federalTax+","+provincialTax+","+yearlyDeduct);
-        // Close print writer
-        pw.flush();	
-        pw.close();
-        System.out.println("File has been saved:"+fileLocation);
+        // Initializing Scanner (can't close scanner)
+        Scanner reader = new Scanner(System.in);
+        
+        // Asks Where They Want The New Result File Stored (File Name)
+        System.out.println("What file name would you like to store it in (e.g. calculate)?");
+        String fileLocation = reader.nextLine(); // where user inputs file name
+        File newFile = new File(fileLocation + ".csv");
+        
+        // Creates new file if not already (created within the folder you are in)
+        try {
+            newFile.createNewFile();
+        }
+        catch (IOException e){ // catches any exception
+            e.printStackTrace();
+        }
+        
+        try{
+            // Initalize packages
+            FileWriter fw = new FileWriter(newFile);
+            BufferedWriter bw = new BufferedWriter(fw);
+            
+            // Prints desired information into file
+            bw.write("Your name is " + name);
+            bw.newLine();
+            bw.write("Occupation: " + occupation);
+            bw.newLine();
+            bw.write("Income: " + income);
+            bw.newLine();
+            bw.write("Pension Plan: " + pensionPlan);
+            bw.newLine();
+            bw.write("Employment Insurance: " + empInsurance);
+            bw.newLine();
+            bw.write("Federal Tax: " + federalTax);
+            bw.newLine();
+            bw.write("Provincial Tax: " + provincialTax);
+            bw.newLine();
+            bw.write("Yearly Deductions: " + yearlyDeduct);
+            bw.flush();
+            bw.close();
         }
         catch (Exception e){
-            System.out.println(e);
+            e.printStackTrace();
         }
         finally{
-            System.out.println("Code within finally block");
+            // Saying it is generated in the CSV file
+            System.out.println("Your results has been generated");
         }
-        reader.close();
     }
 }
