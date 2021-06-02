@@ -36,7 +36,11 @@ class FinalSummative {
         double f = 0.0505;
         
         // Greeting them about our NET pay calculator and what it does, then asking if they would like to proceed or not
-        System.out.println("Welcome to our NET pay calculator where we calculate your NET, then put it in a table, a graph, and generate it in a CSV file\n");
+        System.out.println("Welcome to our NET pay calculator where we calculate your NET pay, then put it in a table, a graph, and generate it in a CSV file\n");
+        
+        // Giving them heads up/disclaimer on what the user has to do in order to generate the graph
+        System.out.println("**In order to generate a Bar Graph, Get the Jar File include in the folder and go to");
+        System.out.println("VS Code - Explorer - Java Projects - Referenced Libraries - Add Library and add the jar file**\n");
         System.out.println("Would you like to use our NET pay calculator (type 'yes' to proceed or 'no' to quit)? ");
         String choice = in.nextLine();
 
@@ -71,7 +75,7 @@ class FinalSummative {
                 printPIT(c,f);
                 printTYD(a,b,c,d);
         
-                // Rounds to nearest whole, re-intialized to call method below
+                // Rounds to nearest whole, re-intialized to call methods below
                 double CPP = (Math.round(Integer.sum(a, c)*b)*100)/100;
                 double EI = (Math.round(c*d)*100)/100;
                 double FIT = (Math.round(c*e)*100)/100;
@@ -245,7 +249,7 @@ class FinalSummative {
             bw.flush();
             bw.close();
         }
-        catch (Exception e){
+        catch (IOException e){
             e.printStackTrace();
         }
         finally{
@@ -287,8 +291,9 @@ class FinalSummative {
         int height = 480;
 
         // Asks user what they would like to name their file, making it user friendly
-        System.out.println("What would you like to name the file");
+        System.out.println("Next, What would you like to name the file of your graph? ");
         String fileName = reader.nextLine();
+        System.out.println("Your graph has been generated\n");
 
         // File name
         File BarChart = new File(fileName + ".jpeg");
