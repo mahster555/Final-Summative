@@ -223,22 +223,22 @@ class FinalSummative {
             FileWriter fw = new FileWriter(newFile);
             BufferedWriter bw = new BufferedWriter(fw);
             
-            // Prints desired information into file
+            // Prints desired information into file (rounded to whole number)
             bw.write("Your name is " + name);
             bw.newLine();
             bw.write("Occupation: " + occupation);
             bw.newLine();
-            bw.write("Income: " + income);
+            bw.write("Income: $" + income);
             bw.newLine();
-            bw.write("Pension Plan: " + pensionPlan);
+            bw.write("Pension Plan: $" + pensionPlan);
             bw.newLine();
-            bw.write("Employment Insurance: " + empInsurance);
+            bw.write("Employment Insurance: $" + empInsurance);
             bw.newLine();
-            bw.write("Federal Tax: " + federalTax);
+            bw.write("Federal Tax: $" + federalTax);
             bw.newLine();
-            bw.write("Provincial Tax: " + provincialTax);
+            bw.write("Provincial Tax: $" + provincialTax);
             bw.newLine();
-            bw.write("Yearly Deductions: " + yearlyDeduct);
+            bw.write("Yearly Deductions: $" + yearlyDeduct);
             bw.flush();
             bw.close();
         }
