@@ -14,7 +14,7 @@ import java.io.*;
 class FinalSummative {
     public static void main(String[] args) {
         
-        // Created so the user can be able to eneter their name, occupation and income salary (can't close scanner).
+        // Created so the user can be able to eneter their name, occupation and income salary.
         Scanner in = new Scanner(System.in);
 
         // Amount and Perentages used throughout the calculations.
@@ -24,34 +24,67 @@ class FinalSummative {
         double e = 0.15;
         double f = 0.0505;
         
-        // Asks the user questions to know more about them.
-        System.out.println("What is your first and last name");
-        String name = in.nextLine();
-        
-        System.out.println("What is your occupation?");
-        String occupation = in.nextLine();
+        // Greeting them about our NET pay calculator and what it does, then asking if they would like to proceed or not
+        System.out.println("Welcome to our NET pay calculator where we calculate your NET, then put it in a table, a graph, and generate it in a CSV file\n");
+        System.out.println("Would you like to use our NET pay calculator (type 'yes' to proceed or 'no' to quit)? ");
+        String choice = in.nextLine();
 
-        // Used as the main number throughout the calculations (input as whole number or results in error).
-        System.out.println("Enter your income salary (to the whole number, if not, reults in an error):");
-        int c = in.nextInt(); 
-        System.out.println();
+        do {
+            // While the choice doesn't equal to either 'yes' or 'no', re-enter (case doesn't matter, e.g. Yes or yes)
+            while (!(choice.equalsIgnoreCase("Yes") || choice.equalsIgnoreCase("No"))){
+                System.out.println("Invalid, Type 'yes' to proceed or 'no' to quit");
+                choice = in.nextLine();
+            }
+            // They quit out of program
+            if (choice.equalsIgnoreCase("No")){
+                System.out.println("You have exited");
+            }
+            // They proceed through the program
+            else if (choice.equalsIgnoreCase("Yes")){
+                
+                // Asks the user questions to know more about them.
+                System.out.println("What is your first and last name");
+                String name = in.nextLine();
         
-        printCPP(a,b,c);
-        printEI(c,d);
-        printFIT(c,e);
-        printPIT(c,f);
-        printTYD(a,b,c,d);
-        
-        tableGUI(a, b, c, d, e, f, name, occupation);
-        
-        // Rounds to nearest whole, re-intialized to call method below
-        double CPP = (Math.round(Integer.sum(a, c)*b)*100)/100;
-        double EI = (Math.round(c*d)*100)/100;
-        double FIT = (Math.round(c*e)*100)/100;
-        double PIT = (Math.round(c*f)*100)/100;
-        double TYD = (Math.round(Integer.sum(a,c)* b + (c*d))*100)/100;
+                System.out.println("What is your occupation?");
+                String occupation = in.nextLine();
 
-        resultsFile(name, occupation, c, CPP, EI, FIT, PIT, TYD);
+                // Used as the main number throughout the calculations (input as whole number or results in error).
+                System.out.println("Enter your income salary (to the whole number, if not, reults in an error):");
+                int c = in.nextInt(); 
+                System.out.println();
+        
+                printCPP(a,b,c);
+                printEI(c,d);
+                printFIT(c,e);
+                printPIT(c,f);
+                printTYD(a,b,c,d);
+        
+                tableGUI(a, b, c, d, e, f, name, occupation);
+        
+                // Rounds to nearest whole, re-intialized to call method below
+                double CPP = (Math.round(Integer.sum(a, c)*b)*100)/100;
+                double EI = (Math.round(c*d)*100)/100;
+                double FIT = (Math.round(c*e)*100)/100;
+                double PIT = (Math.round(c*f)*100)/100;
+                double TYD = (Math.round(Integer.sum(a,c)* b + (c*d))*100)/100;
+
+                resultsFile(name, occupation, c, CPP, EI, FIT, PIT, TYD);
+                    
+                // Ask again if they want to calculate another score
+                System.out.println("Would you like to calculate another NET pay and erase the previous one (type 'yes' to continue or 'no' to quit)");
+                choice = in.nextLine();
+                                
+                // Again if what they typed doesn't match 'yes' or 'no' (case doesn't matter, yes or Yes) (these lines below are for the repeation of the program if they continue)
+                while (!(choice.equalsIgnoreCase("Yes") || choice.equalsIgnoreCase("No"))){
+                    System.out.println("Invalid, Type 'yes' to continue or 'no' to quit");
+                    choice = in.nextLine();
+                }
+            } 
+        } while (!choice.equalsIgnoreCase("No")); // Repeats whole process and calculating another NET pay
+        // Close Scanner and a Exit Statement
+        in.close();
+        System.out.println("You have exited");
     }
     // Finds the useres CPP (Canada Pension Plan) based on their income salary and Ontario's deduction numbers (rounded to the whole number).
     public static void printCPP(int a, double b, int c){
@@ -155,7 +188,7 @@ class FinalSummative {
         tableFrame.setVisible(true);
     }
     public static void resultsFile(String name, String occupation, int c, double CPP, double EI, double FIT, double PIT, double TYD) {
-   
+        // Convert all the variables to strings
         String income = Integer.toString(c);
         String pensionPlan = Double.toString(CPP);
         String empInsurance = Double.toString(EI);
@@ -210,5 +243,6 @@ class FinalSummative {
             // Saying it is generated in the CSV file
             System.out.println("Your results has been generated");
         }
+        System.out.println();
     }
 }
