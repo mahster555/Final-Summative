@@ -5,12 +5,22 @@
  * Description: Creating a NET pay calculator that displays data on a graph and csv file based on the income salary the user enters.
  * */
 
+// Packages used throughout the code
 import java.util.Scanner;
+import java.io.*;
+
+// Packages used to generate the GUI table
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import java.awt.Color; 
-import java.io.*;
+
+// Packages used to generate the bar graph
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartUtils;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.DefaultCategoryDataset;
 
 class FinalSummative {
     public static void main(String[] args) {
@@ -61,16 +71,16 @@ class FinalSummative {
                 printPIT(c,f);
                 printTYD(a,b,c,d);
         
-                tableGUI(a, b, c, d, e, f, name, occupation);
-        
                 // Rounds to nearest whole, re-intialized to call method below
                 double CPP = (Math.round(Integer.sum(a, c)*b)*100)/100;
                 double EI = (Math.round(c*d)*100)/100;
                 double FIT = (Math.round(c*e)*100)/100;
                 double PIT = (Math.round(c*f)*100)/100;
                 double TYD = (Math.round(Integer.sum(a,c)* b + (c*d))*100)/100;
-
+                
+                tableGUI(c, name, occupation, CPP, EI, FIT, PIT, TYD);
                 resultsFile(name, occupation, c, CPP, EI, FIT, PIT, TYD);
+                generateGraph(name, CPP, EI, FIT, PIT, TYD);
                     
                 // Ask again if they want to calculate another score
                 System.out.println("Would you like to calculate another NET pay and erase the previous one (type 'yes' to continue or 'no' to quit)");
@@ -146,14 +156,7 @@ class FinalSummative {
         return TYD;
     }
     // Creates the table in a GUI window, included with all the values for the user(s)
-    public static void tableGUI(int a, double b, int c, double d, double e, double f, String name, String occupation) {
-        // Collect the variables from the calculations in previouis methods
-        double CPP = calculateCPP(a, b ,c);
-        double EI = calculateEI(c, d);
-        double FIT = calculateFIT(c, e);
-        double PIT = calculatePIT(c, f);
-        double TYD = calculateTYD(a, b, c, d);
-
+    public static void tableGUI(int c, String name, String occupation, double CPP, double EI, double FIT, double PIT, double TYD) {
         // Convert all the variables to strings
         String income = Integer.toString(c);
         String pensionPlan = Double.toString(CPP);
@@ -250,5 +253,53 @@ class FinalSummative {
             System.out.println("Your results has been generated");
         }
         System.out.println();
+    }
+    // Creates a bar graph of all the calculations. Gives the user a visual to refer to, especially those who prefer visuals
+    public static void generateGraph(String name, double EI, double CPP, double FIT, double PIT, double TYD) {
+        // Intialize Scanner
+        Scanner reader = new Scanner(System.in);
+
+        // Declare Variables
+        String yTitle = "Amount ($)";
+        String xTitle = "Calculations";
+
+        // Adds dataset to input the values of the amounts for each calculation
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+
+        // Values of all the calculations are inputted onto the chart
+        dataset.addValue(EI, yTitle, "EI");
+        dataset.addValue(CPP, yTitle, "CPP");
+        dataset.addValue(FIT, yTitle, "FIT");
+        dataset.addValue(PIT, yTitle, "PIT");
+        dataset.addValue(TYD, yTitle, "TYD");
+
+        // Creates the bar chart 
+        JFreeChart barChart = ChartFactory.createBarChart(
+            "NET Pay Calculator - " + name,
+            xTitle,
+            yTitle,
+            dataset, PlotOrientation.VERTICAL,
+            true, true, false
+        );
+        
+        // Size of the bar chart is declared 
+        int width = 640;
+        int height = 480;
+
+        // Asks user what they would like to name their file, making it user friendly
+        System.out.println("What would you like to name the file");
+        String fileName = reader.nextLine();
+
+        // File name
+        File BarChart = new File(fileName + ".jpeg");
+
+        // Saves the chart as a JPEG file into the folder used
+        // If unable to, let's user know 'error' occurred
+        try {
+            ChartUtils.saveChartAsJPEG(BarChart, barChart, width, height);
+        }
+        catch (IOException e) {
+            System.out.println("Error. Unable to generate bar graph");
+        }
     }
 }
