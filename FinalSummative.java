@@ -9,6 +9,7 @@ import java.util.Scanner;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import java.awt.Color; 
 import java.io.*;
 
 class FinalSummative {
@@ -167,11 +168,11 @@ class FinalSummative {
 
         // Create a new JFrame and set the title
         tableFrame = new JFrame();
-        tableFrame.setTitle("NET Pay Calculator");
+        tableFrame.setTitle("NET Pay Calculator - " + name);
 
         // Add data values going to be added for rows
         String[][] data = {
-            {name, occupation, "$" + income, "$" + pensionPlan, "$" + empInsurance, "$" + federalTax, "$" + provincialTax, "$" + yearlyDeduct},
+            {name, occupation, "$" + income, "$" + pensionPlan, "$" + empInsurance, "$" + federalTax, "$" + provincialTax, "$" + yearlyDeduct}
         };
 
         // Add the column names
@@ -180,11 +181,16 @@ class FinalSummative {
         // Create a new table and set bounds
         tableTable = new JTable(data,columnNames);
         tableTable.setBounds(30,40,200,300);
+        
+        // Add colour to the user's values, making it more user friendly
+        Color ivory = new Color(255,255,208);
+        tableTable.setOpaque(false);
+        tableTable.setBackground(ivory);
 
         // Create a new scroll pane and set size and make it visible
         JScrollPane sp = new JScrollPane(tableTable);
         tableFrame.add(sp);
-        tableFrame.setSize(1500,700);
+        tableFrame.setSize(1500,150);
         tableFrame.setVisible(true);
     }
     public static void resultsFile(String name, String occupation, int c, double CPP, double EI, double FIT, double PIT, double TYD) {
