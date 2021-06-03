@@ -101,7 +101,13 @@ class FinalSummative {
         in.close();
         System.out.println("You have exited");
     }
-    // Finds the useres CPP (Canada Pension Plan) based on their income salary and Ontario's deduction numbers (rounded to the whole number).
+    /**
+     * Finds the useres CPP (Canada Pension Plan) based on their income salary and Ontario's deduction numbers (rounded to the whole number).
+     * 
+     * @param a
+     * @param b
+     * @param c
+     */
     public static void printCPP(int a, double b, int c){
         System.out.println("Calculating Canada Pension Plan");
         System.out.println("$" + c + " " + a + " = $" + Integer.sum(a, c));  
@@ -109,14 +115,24 @@ class FinalSummative {
         System.out.println("Total CPP: $" + calculateCPP(a,b,c));
         System.out.println();
     }
-     // Finds the EI (Employment Insurance) based on their income salary and Ontario's given percentage (rounded to the whole number).
+    /**
+     * Finds the EI (Employment Insurance) based on their income salary and Ontario's given percentage (rounded to the whole number).
+     * 
+     * @param c
+     * @param d
+     */
     public static void printEI(int c, double d){
         System.out.println("Calculating Employmemt Insurance");
         System.out.println("$" + c + " x " + d);
         System.out.println("Total EI: $" + calculateEI(c,d));
         System.out.println();
     }
-    // Finds the Federal Income Tax based on the gross income (rounded to the whole number).
+    /**
+     * Finds the Federal Income Tax based on the gross income (rounded to the whole number).
+     * 
+     * @param c
+     * @param e
+     */
     public static void printFIT(int c, double e){
         // Finds the Federal Income Tax based on the gross income.
         System.out.println("Calculating Federal Income Tax");
@@ -124,14 +140,26 @@ class FinalSummative {
         System.out.println("Total Federal Income Tax: $" + calculateFIT(c,e));
         System.out.println();
     }
-    // Finds the Pronvicial Income Tax based on the gross income (rounded to the whole number).
+    /**
+     * Finds the Pronvicial Income Tax based on the gross income (rounded to the whole number).
+     * 
+     * @param c
+     * @param f
+     */
     public static void printPIT(int c, double f){
         System.out.println("Calculating Provinvial Income Tax");
         System.out.println("$" + c + " x " + f);
         System.out.println("Total Provincial Income Tax: $" + calculatePIT (c,f));
         System.out.println();
     }
-    // Calculating Total Yearly Deductions based off of the calulations above (rounded to the whole number).
+    /**
+     * Calculating Total Yearly Deductions based off of the calulations above (rounded to the whole number).
+     * 
+     * @param a
+     * @param b
+     * @param c
+     * @param d
+     */
     public static void printTYD(int a, double b, int c, double d){
         System.out.println("Calculating Total Yearly Deductions");
         System.out.println("$" + (Math.round(Integer.sum(a,c) * b)*100)/100 + " + $" + (Math.round(c * d)*100)/100);
@@ -139,27 +167,71 @@ class FinalSummative {
         System.out.println();
     }
     // Function calls used for table. 
+    /**
+     * 
+     * @param a
+     * @param b
+     * @param c
+     * @return
+     */
     public static double calculateCPP(int a, double b, int c){
         double CPP = (Math.round(Integer.sum(a,c) * b)*100)/100;
         return CPP;
     }
+    /**
+     * 
+     * @param c
+     * @param d
+     * @return
+     */
     public static double calculateEI(int c, double d){
         double EI = (Math.round(c * d)*100)/100;
         return EI;
     }
+    /**
+     * 
+     * @param c
+     * @param e
+     * @return
+     */
     public static double calculateFIT(int c, double e){
         double FIT = (Math.round(c * e)*100)/100;
         return FIT;
     }
+    **
+     * 
+     * @param c
+     * @param f
+     * @return
+     */
     public static double calculatePIT(int c, double f){
         double PIT = (Math.round(c * f)*100)/100;
         return PIT;
     }
+    /**
+     * 
+     * @param a
+     * @param b
+     * @param c
+     * @param d
+     * @return
+     */
     public static double calculateTYD(int a, double b, int c, double d){
         double TYD = (Math.round(Integer.sum(a,c) * b + c * d)*100)/100;
         return TYD;
     }
-    // Creates the table in a GUI window, included with all the values for the user(s)
+    /**
+     * Creates the table in a GUI window, included with all the values for the user(s)
+     * 
+     * @param c
+     * @param name
+     * @param occupation
+     * @param CPP
+     * @param EI
+     * @param FIT
+     * @param PIT
+     * @param TYD
+     */
     public static void tableGUI(int c, String name, String occupation, double CPP, double EI, double FIT, double PIT, double TYD) {
         // Convert all the variables to strings
         String income = Integer.toString(c);
@@ -200,6 +272,18 @@ class FinalSummative {
         tableFrame.setSize(1500,150);
         tableFrame.setVisible(true);
     }
+    /**
+     * Generates CSV file with all calculations of NET pay 
+     * 
+     * @param name
+     * @param occupation
+     * @param c
+     * @param CPP
+     * @param EI
+     * @param FIT
+     * @param PIT
+     * @param TYD
+     */
     public static void resultsFile(String name, String occupation, int c, double CPP, double EI, double FIT, double PIT, double TYD) {
         // Convert all the variables to strings
         String income = Integer.toString(c);
@@ -258,7 +342,16 @@ class FinalSummative {
         }
         System.out.println();
     }
-    // Creates a bar graph of all the calculations. Gives the user a visual to refer to, especially those who prefer visuals
+    /**
+     * Creates a bar graph of all the calculations. Gives the user a visual to refer to, especially those who prefer visuals
+     * 
+     * @param name
+     * @param EI
+     * @param CPP
+     * @param FIT
+     * @param PIT
+     * @param TYD
+     */
     public static void generateGraph(String name, double EI, double CPP, double FIT, double PIT, double TYD) {
         // Intialize Scanner
         Scanner reader = new Scanner(System.in);
