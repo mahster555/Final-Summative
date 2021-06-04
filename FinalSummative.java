@@ -125,9 +125,6 @@ class FinalSummative {
         in.close();
         System.out.println("You have exited");
     }
-    /** 
-     * @author tisha
-     */
     /**
      * Finds the useres CPP (Canada Pension Plan) based on their income salary and Ontario's deduction numbers (rounded to the whole number).
      * 
@@ -193,9 +190,6 @@ class FinalSummative {
         System.out.println("Total Yearly Deductions: $" + calculateTYD(a,b,c,d));
         System.out.println();
     }
-    /**
-     * @author tisha
-     */
     // Function calls used for table. 
     /**
      * @param a step 1 to find CPP (subtracts from the income salary)
