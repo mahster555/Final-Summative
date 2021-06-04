@@ -250,14 +250,14 @@ class FinalSummative {
      * @author Saad Naeem
      * Creates the table in a GUI window, included with all the values for the user(s)
      * 
-     * @param c
-     * @param name
-     * @param occupation
-     * @param CPP
-     * @param EI
-     * @param FIT
-     * @param PIT
-     * @param TYD
+     * @param c - Income Salary of user
+     * @param name - Name of user (first and last)
+     * @param occupation - Occupation of user
+     * @param CPP - Canadian Pension Plan calculation 
+     * @param EI - Employment Insurance calculation
+     * @param FIT - Federal Income Tax calculation
+     * @param PIT - Provincial Income Tax calculation
+     * @param TYD - Total Yearly Deduction calculation
      */
     public static void tableGUI(int c, String name, String occupation, double CPP, double EI, double FIT, double PIT, double TYD) {
         // Convert all the variables to strings
@@ -376,12 +376,12 @@ class FinalSummative {
      * @author Saad Naeem
      * Creates a bar graph of all the calculations. Gives the user a visual to refer to, especially those who prefer visuals
      * 
-     * @param name
-     * @param EI
-     * @param CPP
-     * @param FIT
-     * @param PIT
-     * @param TYD
+     * @param name - name of user (first and last)
+     * @param EI - Employment Insurance calculation of user
+     * @param CPP - Canadian Pension Plan calculation of user
+     * @param FIT - Federal Income Tax calculation of user
+     * @param PIT - Provincial Income Tax calculation of user
+     * @param TYD - Total Yearl Deduction calculation of user
      */
     public static void generateGraph(String name, double EI, double CPP, double FIT, double PIT, double TYD) {
         // Intialize Scanner
