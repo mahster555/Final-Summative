@@ -24,13 +24,10 @@ import org.jfree.data.category.DefaultCategoryDataset;
 
 class FinalSummative {
     public static void main(String[] args) {
-        
+
         // Created so the user can be able to eneter their name, occupation and income salary.
         Scanner in = new Scanner(System.in);
 
-    /** 
-     * @tisha
-     */
         // Amount and Perentages used throughout the calculations.
         int a = -3167;
         double b = 0.05;
@@ -129,7 +126,7 @@ class FinalSummative {
         System.out.println("You have exited");
     }
     /** 
-     * @tisha
+     * @author tisha
      */
     /**
      * Finds the useres CPP (Canada Pension Plan) based on their income salary and Ontario's deduction numbers (rounded to the whole number).
@@ -197,7 +194,7 @@ class FinalSummative {
         System.out.println();
     }
     /**
-     * @tisha
+     * @author tisha
      */
     // Function calls used for table. 
     /**
