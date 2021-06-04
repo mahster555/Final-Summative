@@ -5,7 +5,7 @@
  * Description: Creating a NET pay calculator that displays data on a graph and csv file based on the income salary the user enters.
  * */
 
-// Packages used throughout the code
+// Packages used throughout the code (especially for the Input/Output CSV Files)
 import java.util.Scanner;
 import java.io.*;
 
@@ -22,12 +22,6 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
 
-// Packages used to input CSV file
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-
 class FinalSummative {
     public static void main(String[] args) {
         
@@ -42,7 +36,7 @@ class FinalSummative {
         double f = 0.0505;
         
         // Greeting them about our NET pay calculator and what it does, then asking if they would like to proceed or not
-        System.out.println("Welcome to our NET pay calculator where we calculate your NET pay, then put it in a table, a graph, and generate it in a CSV file\n");
+        System.out.println("Welcome to our NET pay calculator.\nWhere we calculate your NET pay, then either put it in a table, generate in CSV file, or a graph.\nThen, finally tell you if your NET is less/above the average Canadian\n");
         
         // Giving them heads up/disclaimer on what the user has to do in order to generate the graph
         System.out.println("**In order to generate a Bar Graph, Get the Jar File include in the folder and go to");
@@ -73,6 +67,8 @@ class FinalSummative {
                 // Used as the main number throughout the calculations (input as whole number or results in error).
                 System.out.println("Enter your income salary (to the whole number, if not, reults in an error):");
                 int c = in.nextInt(); 
+                // Glitch
+                in.nextLine();
                 System.out.println();
         
                 printCPP(a,b,c);
@@ -88,10 +84,32 @@ class FinalSummative {
                 double PIT = (Math.round(c*f)*100)/100;
                 double TYD = (Math.round(Integer.sum(a,c)* b + (c*d))*100)/100;
                 
-                tableGUI(c, name, occupation, CPP, EI, FIT, PIT, TYD);
-                resultsFile(name, occupation, c, CPP, EI, FIT, PIT, TYD);
-                generateGraph(name, CPP, EI, FIT, PIT, TYD);
-                    
+                System.out.println("Which one of these would you like to generate?");
+                System.out.println("Table with your NET (type 'T'), CSV file with your NET (type 'C'), a Bar Graph with your NET (type 'B'), or even all of them (type 'A') ?");
+                choice = in.nextLine();
+
+                while (!(choice.equalsIgnoreCase("T") || choice.equalsIgnoreCase("C") || choice.equalsIgnoreCase("B") || choice.equalsIgnoreCase("A"))){
+                    System.out.println("Invalid. Type 'T' for table, 'C' for CSV File, or 'B' for bar graph");
+                    choice = in.nextLine();
+                }
+                if (choice.equalsIgnoreCase("T")){
+                    tableGUI(c, name, occupation, CPP, EI, FIT, PIT, TYD);
+                    inputFile(c, CPP, EI, FIT, PIT);
+                }
+                else if (choice.equalsIgnoreCase("C")){
+                    resultsFile(name, occupation, c, CPP, EI, FIT, PIT, TYD); 
+                    inputFile(c, CPP, EI, FIT, PIT);
+                }
+                else if (choice.equalsIgnoreCase("B")){
+                    generateGraph(name, CPP, EI, FIT, PIT, TYD); 
+                    inputFile(c, CPP, EI, FIT, PIT);
+                }
+                else {
+                    tableGUI(c, name, occupation, CPP, EI, FIT, PIT, TYD);
+                    resultsFile(name, occupation, c, CPP, EI, FIT, PIT, TYD);
+                    generateGraph(name, CPP, EI, FIT, PIT, TYD);
+                    inputFile(c, CPP, EI, FIT, PIT);
+                }          
                 // Ask again if they want to calculate another score
                 System.out.println("Would you like to calculate another NET pay and erase the previous one (type 'yes' to continue or 'no' to quit)");
                 choice = in.nextLine();
@@ -174,7 +192,6 @@ class FinalSummative {
     }
     // Function calls used for table. 
     /**
-     * 
      * @param a
      * @param b
      * @param c
@@ -185,7 +202,6 @@ class FinalSummative {
         return CPP;
     }
     /**
-     * 
      * @param c
      * @param d
      * @return
@@ -195,7 +211,6 @@ class FinalSummative {
         return EI;
     }
     /**
-     * 
      * @param c
      * @param e
      * @return
@@ -205,7 +220,6 @@ class FinalSummative {
         return FIT;
     }
     **
-     * 
      * @param c
      * @param f
      * @return
@@ -215,7 +229,6 @@ class FinalSummative {
         return PIT;
     }
     /**
-     * 
      * @param a
      * @param b
      * @param c
@@ -277,6 +290,9 @@ class FinalSummative {
         tableFrame.add(sp);
         tableFrame.setSize(1500,150);
         tableFrame.setVisible(true);
+        
+        // Tells user table is generated
+        System.out.println("Table has been Generated\n");
     }
     /**
      * Generates CSV file with all calculations of NET pay 
@@ -348,85 +364,6 @@ class FinalSummative {
         }
         System.out.println();
     }
-    public static void inputFile(int c, double CPP, double EI, double FIT, double PIT) {
-       
-        // Convert file path into string 
-        String file = "/Users/aweso/documents/average.csv";
-        String line = "";
- 
-        try {
-             
-             // Use package to read CSV file 
-             BufferedReader br= new BufferedReader(new FileReader(file));
- 
-             while((line = br.readLine()) != null){
-                 // In order to store all the data sepereated by sections or in this case commas
-                 String [] values = line.split(",");
-                 
-                // Convert string to int
-                int ACIncome = Integer.parseInt(values[1]);
-                int ACPensionPlan = Integer.parseInt(values[3]);
-                int ACEmployeeInsurance = Integer.parseInt(values[5]);
-                int ACFederalTax = Integer.parseInt(values[7]);
-                int ACProvincialTax = Integer.parseInt(values[9]);
-
-                // the values from the csv file compared to user data by using if statement
-                System.out.println("Average Canadian income is $" + values[1]);
-                
-                if (ACIncome >= c) {
-                    System.out.println("You earn $" + (ACIncome  - c) + " more than the average Canadian");
-                }
-                if (ACIncome <= c) {
-                    System.out.println("You earn $" + (c - ACIncome) + " less than the average Canadian");
-                }
-
-                System.out.println("Average Canadian deduction for pension plan is $" + values[3]);
-                
-                if (ACPensionPlan >= CPP) {
-                    System.out.println("You deduct $" + (ACPensionPlan  - CPP) + " more for your pension plan than the average Canadian");
-                }
-                if (ACPensionPlan <= CPP) {
-                    System.out.println("You deduct $" + (CPP - ACPensionPlan) + " less for your pension plan than the average Canadian");
-                }
-
-                System.out.println("Average Canadian deduction for employee insurance is $" + values[5]);
-                
-                if (ACEmployeeInsurance >= EI) {
-                    System.out.println("You deduct $" + (ACEmployeeInsurance  - EI) + " more for your employee insurance than the average Canadian");
-                }
-                if (ACEmployeeInsurance <= EI) {
-                    System.out.println("You deduct $" + (EI - ACEmployeeInsurance) + " less for your employee insurance than the average Canadian");
-                }
-
-                System.out.println("Average Canadian federal tax is $" + values[7]);
-                
-                if (ACFederalTax >= FIT) {
-                    System.out.println("You deduct $" + (ACFederalTax  - FIT) + " more federal tax than the average Canadian");
-                }
-                if (ACFederalTax <= FIT) {
-                    System.out.println("You deduct $" + (FIT - ACFederalTax) + " less federal tax than the average Canadian");
-                }
-
-                System.out.println("Average Canadian provincial tax is $" + values[9]);
-                
-                if (ACProvincialTax >= PIT) {
-                    System.out.println("You deduct $" + (ACProvincialTax  - PIT) + " more provincial tax than the average Canadian");
-                }
-                if (ACProvincialTax <= PIT) {
-                    System.out.println("You deduct $" + (PIT -ACProvincialTax) + " less provincial tax than the average Canadian");
-                }
-             
-           }    
-        } 
-        // catch block in case file is not found
-        catch (FileNotFoundException e){
-            e.printStackTrace();
-        } 
-        catch (IOException  e){
-            e.printStackTrace();
-        }
- 
-    }
     /**
      * Creates a bar graph of all the calculations. Gives the user a visual to refer to, especially those who prefer visuals
      * 
@@ -484,5 +421,95 @@ class FinalSummative {
         catch (IOException e) {
             System.out.println("Error. Unable to generate bar graph");
         }
+    }
+    /**
+     * Tells the user whether the NET pay is above or below the Canadian averages by the use of the avergae file 
+     * 
+     * @param c
+     * @param CPP
+     * @param EI
+     * @param FIT
+     * @param PIT
+     */
+    public static void inputFile(int c, double CPP, double EI, double FIT, double PIT) {
+        // Initialize scanner (can't close, error)
+        Scanner files = new Scanner(System.in);
+        // Convert file path into string 
+        System.out.println("Type in your file Name and Location of your average file (e.g. \\Users\\Name\\Desktop\\FolderName\\average) ");
+        String fileNameLocation = files.nextLine();
+        String file = (fileNameLocation + ".csv");
+        System.out.println();
+        String line = "";
+ 
+        try {
+             
+             // Use package to read CSV file 
+             BufferedReader br= new BufferedReader(new FileReader(file));
+ 
+             while((line = br.readLine()) != null){
+                 // In order to store all the data sepereated by sections or in this case commas
+                 String [] values = line.split(",");
+                 
+                // Convert string to int
+                int ACIncome = Integer.parseInt(values[1]);
+                int ACPensionPlan = Integer.parseInt(values[3]);
+                int ACEmployeeInsurance = Integer.parseInt(values[5]);
+                int ACFederalTax = Integer.parseInt(values[7]);
+                int ACProvincialTax = Integer.parseInt(values[9]);
+
+                // the values from the csv file compared to user data by using if statement
+                System.out.println("Average Canadian income is $" + values[1]);
+                
+                if (ACIncome >= c) {
+                    System.out.println("You earn $" + (ACIncome  - c) + " more than the average Canadian\n");
+                }
+                if (ACIncome <= c) {
+                    System.out.println("You earn $" + (c - ACIncome) + " less than the average Canadian\n");
+                }
+
+                System.out.println("Average Canadian deduction for pension plan is $" + values[3]);
+                
+                if (ACPensionPlan >= CPP) {
+                    System.out.println("You deduct $" + (ACPensionPlan  - CPP) + " more for your pension plan than the average Canadian\n");
+                }
+                if (ACPensionPlan <= CPP) {
+                    System.out.println("You deduct $" + (CPP - ACPensionPlan) + " less for your pension plan than the average Canadian\n");
+                }
+
+                System.out.println("Average Canadian deduction for employee insurance is $" + values[5]);
+                
+                if (ACEmployeeInsurance >= EI) {
+                    System.out.println("You deduct $" + (ACEmployeeInsurance  - EI) + " more for your employee insurance than the average Canadian\n");
+                }
+                if (ACEmployeeInsurance <= EI) {
+                    System.out.println("You deduct $" + (EI - ACEmployeeInsurance) + " less for your employee insurance than the average Canadian\n");
+                }
+
+                System.out.println("Average Canadian federal tax is $" + values[7]);
+                
+                if (ACFederalTax >= FIT) {
+                    System.out.println("You deduct $" + (ACFederalTax  - FIT) + " more federal tax than the average Canadian\n");
+                }
+                if (ACFederalTax <= FIT) {
+                    System.out.println("You deduct $" + (FIT - ACFederalTax) + " less federal tax than the average Canadian\n");
+                }
+
+                System.out.println("Average Canadian provincial tax is $" + values[9]);
+                
+                if (ACProvincialTax >= PIT) {
+                    System.out.println("You deduct $" + (ACProvincialTax  - PIT) + " more provincial tax than the average Canadian\n");
+                }
+                if (ACProvincialTax <= PIT) {
+                    System.out.println("You deduct $" + (PIT -ACProvincialTax) + " less provincial tax than the average Canadian\n");
+                }           
+            }    
+        } 
+        // catch block in case file is not found
+        catch (FileNotFoundException e){
+            e.printStackTrace();
+        } 
+        catch (IOException  e){
+            e.printStackTrace();
+        } 
     }
 }
