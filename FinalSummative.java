@@ -198,10 +198,6 @@ class FinalSummative {
     }
     /**
      * @tisha
-     * @param a
-     * @param b
-     * @param c
-     * @return
      */
     // Function calls used for table. 
     /**
