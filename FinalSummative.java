@@ -195,7 +195,7 @@ class FinalSummative {
      * @param a step 1 to find CPP (subtracts from the income salary)
      * @param b step 2 to find CPP (multiplies with the answer from step 1)
      * @param c the income salary
-     * @return
+     * @return CPP - Canadian Pension Plan value from calculation
      */
 
     public static double calculateCPP(int a, double b, int c){
@@ -205,7 +205,7 @@ class FinalSummative {
     /**
      * @param c the income salary
      * @param d used to find the EI (0.016)
-     * @return
+     * @return EI - Employment Insurance value from calculation
      */
     public static double calculateEI(int c, double d){
         double EI = (Math.round(c * d)*100)/100;
@@ -214,7 +214,7 @@ class FinalSummative {
     /**
      * @param c the income salary
      * @param e used to find FIT (0.15)
-     * @return
+     * @return FIT - Federal Income Tax value from calculation
      */
     public static double calculateFIT(int c, double e){
         double FIT = (Math.round(c * e)*100)/100;
@@ -223,7 +223,7 @@ class FinalSummative {
     /**
      * @param c the income salary
      * @param f used ti find PIT (0.0505)
-     * @return
+     * @return PIT - Provincial Income Tax value from calculation
      */
     public static double calculatePIT(int c, double f){
         double PIT = (Math.round(c * f)*100)/100;
@@ -234,14 +234,13 @@ class FinalSummative {
      * @param b multiplies (0.05)
      * @param c income salary
      * @param d used to find EI (0.016)
-     * @return
+     * @return TYD - Total Yearly Deduction value from calculation
      */
     public static double calculateTYD(int a, double b, int c, double d){
         double TYD = (Math.round(Integer.sum(a,c) * b + c * d)*100)/100;
         return TYD;
     }
     /**
-     * @author Saad Naeem
      * Creates the table in a GUI window, included with all the values for the user(s)
      * 
      * @param c - Income Salary of user
@@ -367,7 +366,6 @@ class FinalSummative {
         System.out.println();
     }
     /**
-     * @author Saad Naeem
      * Creates a bar graph of all the calculations. Gives the user a visual to refer to, especially those who prefer visuals
      * 
      * @param name - name of user (first and last)
