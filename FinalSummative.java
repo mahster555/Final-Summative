@@ -36,7 +36,7 @@ class FinalSummative {
         double f = 0.0505;
         
         // Greeting them about our NET pay calculator and what it does, then asking if they would like to proceed or not
-        System.out.println("Welcome to our NET pay calculator.\nWhere we calculate your NET pay, then either put it in a table, generate in CSV file, or a graph.\nThen, finally tell you if your NET is less/above the average Canadian\n");
+        System.out.println("Welcome to our NET pay calculator.\nWhere we calculate your NET pay, then either put it in a table, generate in CSV file, or a graph (your choice).\nThen finally tell you if your NET is less/above the average Canadian\n");
         
         // Giving them heads up/disclaimer on what the user has to do in order to generate the graph
         System.out.println("**In order to generate a Bar Graph, Get the Jar File include in the folder and go to");
@@ -84,14 +84,17 @@ class FinalSummative {
                 double PIT = (Math.round(c*f)*100)/100;
                 double TYD = (Math.round(Integer.sum(a,c)* b + (c*d))*100)/100;
                 
-                System.out.println("Which one of these would you like to generate?");
-                System.out.println("Table with your NET (type 'T'), CSV file with your NET (type 'C'), a Bar Graph with your NET (type 'B'), or even all of them (type 'A') ?");
+                // Gives options on what user wants to generate
+                System.out.println("Which choice would you like to generate?");
+                System.out.println("Table (type 'T'), CSV file (type 'C'), a Bar Graph (type 'B'), a Table and CSV file (type 'TC'),\na CSV file and Bar Graph (type 'CB'), a Table and Bar graph (type 'TB'), or even all of them (type 'A') ?");
                 choice = in.nextLine();
-
-                while (!(choice.equalsIgnoreCase("T") || choice.equalsIgnoreCase("C") || choice.equalsIgnoreCase("B") || choice.equalsIgnoreCase("A"))){
-                    System.out.println("Invalid. Type 'T' for table, 'C' for CSV File, or 'B' for bar graph");
+                
+                // While choice doesn't equals one of the options
+                while (!(choice.equalsIgnoreCase("T") || choice.equalsIgnoreCase("C") || choice.equalsIgnoreCase("B") || choice.equalsIgnoreCase("TC") || choice.equalsIgnoreCase("CB") || choice.equalsIgnoreCase("TB") || choice.equalsIgnoreCase("A"))){
+                    System.out.println("Invalid. Type 'T' (Table), 'C' (CSV File), 'B' (Bar Graph), 'TC' (Table and Bar Graph), 'CB' (CSV File and Bar Graph), 'TB' (Table and Bar Graph) 'A' (All) ");
                     choice = in.nextLine();
                 }
+                // When they type in one of the options (for all below)
                 if (choice.equalsIgnoreCase("T")){
                     tableGUI(c, name, occupation, CPP, EI, FIT, PIT, TYD);
                     inputFile(c, CPP, EI, FIT, PIT);
@@ -102,6 +105,21 @@ class FinalSummative {
                 }
                 else if (choice.equalsIgnoreCase("B")){
                     generateGraph(name, CPP, EI, FIT, PIT, TYD); 
+                    inputFile(c, CPP, EI, FIT, PIT);
+                }
+                else if (choice.equalsIgnoreCase("TC")){
+                    tableGUI(c, name, occupation, CPP, EI, FIT, PIT, TYD);
+                    resultsFile(name, occupation, c, CPP, EI, FIT, PIT, TYD);
+                    inputFile(c, CPP, EI, FIT, PIT);
+                }
+                else if (choice.equalsIgnoreCase("CB")){
+                    resultsFile(name, occupation, c, CPP, EI, FIT, PIT, TYD);
+                    generateGraph(name, CPP, EI, FIT, PIT, TYD);
+                    inputFile(c, CPP, EI, FIT, PIT);
+                }
+                else if (choice.equalsIgnoreCase("TB")){
+                    tableGUI(c, name, occupation, CPP, EI, FIT, PIT, TYD);
+                    generateGraph(name, CPP, EI, FIT, PIT, TYD);
                     inputFile(c, CPP, EI, FIT, PIT);
                 }
                 else {
@@ -119,11 +137,12 @@ class FinalSummative {
                     System.out.println("Invalid, Type 'yes' to continue or 'no' to quit");
                     choice = in.nextLine();
                 }
+                if (choice.equalsIgnoreCase("No")){
+                    System.out.println("You have exited");
+                }
             } 
-        } while (!choice.equalsIgnoreCase("No")); // Repeats whole process and calculating another NET pay
-        // Close Scanner and a Exit Statement
+        } while (choice.equalsIgnoreCase("Yes")); // Repeats whole process and calculating another NET pay
         in.close();
-        System.out.println("You have exited");
     }
     /**
      * Finds the useres CPP (Canada Pension Plan) based on their income salary and Ontario's deduction numbers (rounded to the whole number).
@@ -376,7 +395,7 @@ class FinalSummative {
      * @param TYD - Total Yearl Deduction calculation of user
      */
     public static void generateGraph(String name, double EI, double CPP, double FIT, double PIT, double TYD) {
-        // Intialize Scanner
+        // Intialize Scanner (can't close error)
         Scanner reader = new Scanner(System.in);
 
         // Declare Variables
@@ -436,14 +455,14 @@ class FinalSummative {
         // Initialize scanner (can't close, error)
         Scanner files = new Scanner(System.in);
         // Convert file path into string 
-        System.out.println("Type in your file Name and Location of your average file (e.g. \\Users\\Name\\Desktop\\FolderName\\average) ");
+        System.out.println("Now, Type in your file name location of your average file to see if your below/above the average Canadians (e.g. \\Users\\Name\\Desktop\\FolderName\\average) ");
         String fileNameLocation = files.nextLine();
         String file = (fileNameLocation + ".csv");
         System.out.println();
         String line = "";
  
         try {
-             
+            
              // Use package to read CSV file 
              BufferedReader br= new BufferedReader(new FileReader(file));
  
@@ -509,7 +528,7 @@ class FinalSummative {
         catch (FileNotFoundException e){
             e.printStackTrace();
         } 
-        catch (IOException  e){
+        catch (IOException e){
             e.printStackTrace();
         } 
     }
