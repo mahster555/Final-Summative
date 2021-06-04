@@ -348,6 +348,85 @@ class FinalSummative {
         }
         System.out.println();
     }
+    public static void inputFile(int c, double CPP, double EI, double FIT, double PIT) {
+       
+        // Convert file path into string 
+        String file = "/Users/aweso/documents/average.csv";
+        String line = "";
+ 
+        try {
+             
+             // Use package to read CSV file 
+             BufferedReader br= new BufferedReader(new FileReader(file));
+ 
+             while((line = br.readLine()) != null){
+                 // In order to store all the data sepereated by sections or in this case commas
+                 String [] values = line.split(",");
+                 
+                // Convert string to int
+                int ACIncome = Integer.parseInt(values[1]);
+                int ACPensionPlan = Integer.parseInt(values[3]);
+                int ACEmployeeInsurance = Integer.parseInt(values[5]);
+                int ACFederalTax = Integer.parseInt(values[7]);
+                int ACProvincialTax = Integer.parseInt(values[9]);
+
+                // the values from the csv file compared to user data by using if statement
+                System.out.println("Average Canadian income is $" + values[1]);
+                
+                if (ACIncome >= c) {
+                    System.out.println("You earn $" + (ACIncome  - c) + " more than the average Canadian");
+                }
+                if (ACIncome <= c) {
+                    System.out.println("You earn $" + (c - ACIncome) + " less than the average Canadian");
+                }
+
+                System.out.println("Average Canadian deduction for pension plan is $" + values[3]);
+                
+                if (ACPensionPlan >= CPP) {
+                    System.out.println("You deduct $" + (ACPensionPlan  - CPP) + " more for your pension plan than the average Canadian");
+                }
+                if (ACPensionPlan <= CPP) {
+                    System.out.println("You deduct $" + (CPP - ACPensionPlan) + " less for your pension plan than the average Canadian");
+                }
+
+                System.out.println("Average Canadian deduction for employee insurance is $" + values[5]);
+                
+                if (ACEmployeeInsurance >= EI) {
+                    System.out.println("You deduct $" + (ACEmployeeInsurance  - EI) + " more for your employee insurance than the average Canadian");
+                }
+                if (ACEmployeeInsurance <= EI) {
+                    System.out.println("You deduct $" + (EI - ACEmployeeInsurance) + " less for your employee insurance than the average Canadian");
+                }
+
+                System.out.println("Average Canadian federal tax is $" + values[7]);
+                
+                if (ACFederalTax >= FIT) {
+                    System.out.println("You deduct $" + (ACFederalTax  - FIT) + " more federal tax than the average Canadian");
+                }
+                if (ACFederalTax <= FIT) {
+                    System.out.println("You deduct $" + (FIT - ACFederalTax) + " less federal tax than the average Canadian");
+                }
+
+                System.out.println("Average Canadian provincial tax is $" + values[9]);
+                
+                if (ACProvincialTax >= PIT) {
+                    System.out.println("You deduct $" + (ACProvincialTax  - PIT) + " more provincial tax than the average Canadian");
+                }
+                if (ACProvincialTax <= PIT) {
+                    System.out.println("You deduct $" + (PIT -ACProvincialTax) + " less provincial tax than the average Canadian");
+                }
+             
+           }    
+        } 
+        // catch block in case file is not found
+        catch (FileNotFoundException e){
+            e.printStackTrace();
+        } 
+        catch (IOException  e){
+            e.printStackTrace();
+        }
+ 
+    }
     /**
      * Creates a bar graph of all the calculations. Gives the user a visual to refer to, especially those who prefer visuals
      * 
