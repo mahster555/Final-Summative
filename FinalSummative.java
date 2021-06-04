@@ -250,6 +250,7 @@ class FinalSummative {
         return TYD;
     }
     /**
+     * @author Saad Naeem
      * Creates the table in a GUI window, included with all the values for the user(s)
      * 
      * @param c
@@ -375,6 +376,7 @@ class FinalSummative {
         System.out.println();
     }
     /**
+     * @author Saad Naeem
      * Creates a bar graph of all the calculations. Gives the user a visual to refer to, especially those who prefer visuals
      * 
      * @param name
