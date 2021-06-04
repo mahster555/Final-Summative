@@ -28,6 +28,9 @@ class FinalSummative {
         // Created so the user can be able to eneter their name, occupation and income salary.
         Scanner in = new Scanner(System.in);
 
+    /** 
+     * @tisha
+     */
         // Amount and Perentages used throughout the calculations.
         int a = -3167;
         double b = 0.05;
@@ -125,12 +128,15 @@ class FinalSummative {
         in.close();
         System.out.println("You have exited");
     }
+    /** 
+     * @tisha
+     */
     /**
      * Finds the useres CPP (Canada Pension Plan) based on their income salary and Ontario's deduction numbers (rounded to the whole number).
      * 
-     * @param a
-     * @param b
-     * @param c
+     * @param a step 1 to find CPP (subtracts from the income salary)
+     * @param b step 2 to find CPP (multiplies with the answer from step 1)
+     * @param c the income salary
      */
     public static void printCPP(int a, double b, int c){
         System.out.println("Calculating Canada Pension Plan");
@@ -142,8 +148,8 @@ class FinalSummative {
     /**
      * Finds the EI (Employment Insurance) based on their income salary and Ontario's given percentage (rounded to the whole number).
      * 
-     * @param c
-     * @param d
+     * @param c the income salary
+     * @param d to find the EI you multiply 1.6%
      */
     public static void printEI(int c, double d){
         System.out.println("Calculating Employmemt Insurance");
@@ -154,8 +160,8 @@ class FinalSummative {
     /**
      * Finds the Federal Income Tax based on the gross income (rounded to the whole number).
      * 
-     * @param c
-     * @param e
+     * @param c the income salary
+     * @param e the percentage that multiplies to find FIT (15%)
      */
     public static void printFIT(int c, double e){
         // Finds the Federal Income Tax based on the gross income.
@@ -167,8 +173,8 @@ class FinalSummative {
     /**
      * Finds the Pronvicial Income Tax based on the gross income (rounded to the whole number).
      * 
-     * @param c
-     * @param f
+     * @param c the income salary
+     * @param f the percentage that multiplies to find PIT (5.0505%)
      */
     public static void printPIT(int c, double f){
         System.out.println("Calculating Provinvial Income Tax");
@@ -179,10 +185,10 @@ class FinalSummative {
     /**
      * Calculating Total Yearly Deductions based off of the calulations above (rounded to the whole number).
      * 
-     * @param a
-     * @param b
-     * @param c
-     * @param d
+     * @param a number used to find the CPP (3167)
+     * @param b number used to to find CPP after subtracting (0.05)
+     * @param c the income salary
+     * @param d used to find the EI (0.016)
      */
     public static void printTYD(int a, double b, int c, double d){
         System.out.println("Calculating Total Yearly Deductions");
@@ -190,20 +196,28 @@ class FinalSummative {
         System.out.println("Total Yearly Deductions: $" + calculateTYD(a,b,c,d));
         System.out.println();
     }
-    // Function calls used for table. 
     /**
+     * @tisha
      * @param a
      * @param b
      * @param c
      * @return
      */
+    // Function calls used for table. 
+    /**
+     * @param a step 1 to find CPP (subtracts from the income salary)
+     * @param b step 2 to find CPP (multiplies with the answer from step 1)
+     * @param c the income salary
+     * @return
+     */
+
     public static double calculateCPP(int a, double b, int c){
         double CPP = (Math.round(Integer.sum(a,c) * b)*100)/100;
         return CPP;
     }
     /**
-     * @param c
-     * @param d
+     * @param c the income salary
+     * @param d used to find the EI (0.016)
      * @return
      */
     public static double calculateEI(int c, double d){
@@ -211,17 +225,17 @@ class FinalSummative {
         return EI;
     }
     /**
-     * @param c
-     * @param e
+     * @param c the income salary
+     * @param e used to find FIT (0.15)
      * @return
      */
     public static double calculateFIT(int c, double e){
         double FIT = (Math.round(c * e)*100)/100;
         return FIT;
     }
-    **
-     * @param c
-     * @param f
+    /**
+     * @param c the income salary
+     * @param f used ti find PIT (0.0505)
      * @return
      */
     public static double calculatePIT(int c, double f){
@@ -229,10 +243,10 @@ class FinalSummative {
         return PIT;
     }
     /**
-     * @param a
-     * @param b
-     * @param c
-     * @param d
+     * @param a subtracts from CPP (3167)
+     * @param b multiplies (0.05)
+     * @param c income salary
+     * @param d used to find EI (0.016)
      * @return
      */
     public static double calculateTYD(int a, double b, int c, double d){
