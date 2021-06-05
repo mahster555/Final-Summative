@@ -317,14 +317,14 @@ class FinalSummative {
     /**
      * Generates CSV file with all calculations of NET pay 
      * 
-     * @param name
-     * @param occupation
-     * @param c
-     * @param CPP
-     * @param EI
-     * @param FIT
-     * @param PIT
-     * @param TYD
+     * @param name Name of the user 
+     * @param occupation Name of the occupation
+     * @param c Income Salary of the user
+     * @param CPP Canadian Pension Plan Calculation
+     * @param EI Employment Insurance Calculation
+     * @param FIT Federal Income Tax Calculation
+     * @param PIT Provincial Income Tax Calculation
+     * @param TYD Total Yearly Deduction Calculation
      */
     public static void resultsFile(String name, String occupation, int c, double CPP, double EI, double FIT, double PIT, double TYD) {
         // Convert all the variables to strings
@@ -445,11 +445,11 @@ class FinalSummative {
     /**
      * Tells the user whether the NET pay is above or below the Canadian averages by the use of the avergae file 
      * 
-     * @param c
-     * @param CPP
-     * @param EI
-     * @param FIT
-     * @param PIT
+     * @param c Income of the user 
+     * @param CPP Canadian Pension Plan Calculation
+     * @param EI Employment Insurance Calculation
+     * @param FIT Federal Income Tax Calculation
+     * @param PIT Provincial Income Tax Calculation
      */
     public static void inputFile(int c, double CPP, double EI, double FIT, double PIT) {
         // Initialize scanner (can't close, error)
