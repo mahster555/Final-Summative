@@ -104,8 +104,8 @@ class FinalSummative {
                     inputFile(c, CPP, EI, FIT, PIT);
                 }
                 else if (choice.equalsIgnoreCase("B")){
-                    generateGraph(name, CPP, EI, FIT, PIT, TYD); 
                     inputFile(c, CPP, EI, FIT, PIT);
+                    generateGraph(name, CPP, EI, FIT, PIT, TYD); 
                 }
                 else if (choice.equalsIgnoreCase("TC")){
                     tableGUI(c, name, occupation, CPP, EI, FIT, PIT, TYD);
@@ -114,19 +114,19 @@ class FinalSummative {
                 }
                 else if (choice.equalsIgnoreCase("CB")){
                     resultsFile(name, occupation, c, CPP, EI, FIT, PIT, TYD);
-                    generateGraph(name, CPP, EI, FIT, PIT, TYD);
                     inputFile(c, CPP, EI, FIT, PIT);
+                    generateGraph(name, CPP, EI, FIT, PIT, TYD);
                 }
                 else if (choice.equalsIgnoreCase("TB")){
                     tableGUI(c, name, occupation, CPP, EI, FIT, PIT, TYD);
-                    generateGraph(name, CPP, EI, FIT, PIT, TYD);
                     inputFile(c, CPP, EI, FIT, PIT);
+                    generateGraph(name, CPP, EI, FIT, PIT, TYD);   
                 }
                 else {
                     tableGUI(c, name, occupation, CPP, EI, FIT, PIT, TYD);
                     resultsFile(name, occupation, c, CPP, EI, FIT, PIT, TYD);
-                    generateGraph(name, CPP, EI, FIT, PIT, TYD);
                     inputFile(c, CPP, EI, FIT, PIT);
+                    generateGraph(name, CPP, EI, FIT, PIT, TYD); 
                 }          
                 // Ask again if they want to calculate another score
                 System.out.println("Would you like to calculate another NET pay and erase the previous one (type 'yes' to continue or 'no' to quit)");
